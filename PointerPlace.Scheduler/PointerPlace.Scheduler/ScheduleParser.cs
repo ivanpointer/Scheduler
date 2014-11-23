@@ -138,7 +138,8 @@ namespace PointerPlace.Scheduler
                     var value = ParseScheduleEntryValueInner(scheduleEntryValue);
                     return new ScheduleEntryValue
                     {
-                        Value = value
+                        Value = value,
+                        Threshold = value
                     };
                 }
                 // This is a range

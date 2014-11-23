@@ -72,5 +72,21 @@ namespace PointerPlace.Scheduler.Test
             Assert.AreEqual(0, point.Millisecond);
         }
 
+        [TestMethod]
+        public void TestLeapYear()
+        {
+            var point = new DateTime(2017, 11, 29, 20, 52, 37);
+
+            point = Scheduler.GetNext("0 0 29 2 *", point);
+
+            Assert.AreEqual(2020, point.Year);
+            Assert.AreEqual(2, point.Month);
+            Assert.AreEqual(29, point.Day);
+            Assert.AreEqual(0, point.Hour);
+            Assert.AreEqual(0, point.Minute);
+            Assert.AreEqual(0, point.Second);
+            Assert.AreEqual(0, point.Millisecond);
+        }
+
     }
 }
