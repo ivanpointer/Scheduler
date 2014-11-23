@@ -132,7 +132,7 @@ namespace PointerPlace.Scheduler
         /// <param name="hour">The hour to advance to</param>
         public void AdvanceHour(int hour)
         {
-            Hour += hour;
+            Hour = hour;
             Minute = 0;
         }
 
@@ -142,7 +142,7 @@ namespace PointerPlace.Scheduler
         /// <param name="minute">The minute to advance to</param>
         public void AdvanceMinute(int minute)
         {
-            Minute += minute;
+            Minute = minute;
         }
     }
 }

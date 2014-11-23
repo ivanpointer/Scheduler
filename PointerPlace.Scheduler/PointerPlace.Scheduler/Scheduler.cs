@@ -38,7 +38,7 @@ namespace PointerPlace.Scheduler
 
             // Set to the top of the next minute
             var point = new PointInTime(startingPoint.Value);
-            point.AdvanceMinute(1);
+            point.AdvanceMinute(point.Minute + 1);
 
             // Build out our matchers into our container
             var container = new ScheduleMatcher

@@ -76,7 +76,7 @@ namespace PointerPlace.Scheduler.Matchers
             var nextMatch = NextMatch();
             if (nextMatch != -1)
             {
-                Point.AdvanceMinute(nextMatch - Point.Minute);
+                Point.AdvanceMinute(nextMatch);
                 return true;
             }
             else

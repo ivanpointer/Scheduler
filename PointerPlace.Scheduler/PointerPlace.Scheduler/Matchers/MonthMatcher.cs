@@ -67,8 +67,7 @@ namespace PointerPlace.Scheduler.Matchers
         //  is no valid next value, -1 is returned.
         public override int NextMatch()
         {
-            // TODO, VERIFY MONTH OBOB
-            return NextMatch(ValidMonths, Point.Month + 1);
+            return NextMatch(ValidMonths, Point.Month);
         }
 
         // Tries to increment the internal PointInTime to its next valid value, returns true if successfull, false otherwise.
@@ -77,7 +76,7 @@ namespace PointerPlace.Scheduler.Matchers
             var nextMatch = NextMatch();
             if (nextMatch != -1)
             {
-                Point.AdvanceMonth(nextMatch - Point.Month);
+                Point.AdvanceMonth(nextMatch);
                 return true;
             }
             else

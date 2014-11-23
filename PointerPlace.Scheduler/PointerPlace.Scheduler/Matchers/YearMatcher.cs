@@ -56,9 +56,10 @@ namespace PointerPlace.Scheduler.Matchers
         //  the original point in time
         public override bool Increment()
         {
+            var nextMatch = NextMatch();
             if (Point.Year <= MaxYear)
             {
-                Point.AdvanceYear(1);
+                Point.AdvanceYear(nextMatch);
                 return true;
             }
             else
