@@ -88,5 +88,21 @@ namespace PointerPlace.Scheduler.Test
             Assert.AreEqual(0, point.Millisecond);
         }
 
+        [TestMethod]
+        public void TestDayOfWeekNomenclature()
+        {
+            var point = new DateTime(2014, 11, 29, 20, 52, 37);
+
+            point = Scheduler.GetNext("0 0 * * WED", point);
+
+            Assert.AreEqual(2014, point.Year);
+            Assert.AreEqual(12, point.Month);
+            Assert.AreEqual(3, point.Day);
+            Assert.AreEqual(0, point.Hour);
+            Assert.AreEqual(0, point.Minute);
+            Assert.AreEqual(0, point.Second);
+            Assert.AreEqual(0, point.Millisecond);
+        }
+
     }
 }
