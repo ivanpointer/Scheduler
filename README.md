@@ -8,15 +8,15 @@ Scheduler is a small and fast utility that takes a schedule and determines the n
 ## Cron Schedules
 Cron schedules allow for defining advanced schedules down to the minute.  This style of scheduling is used predominately in Linux environments, but is a very powerful and simple method of specifying a schedule.  The format for a cron schedule is shown here:
 
-    *    *    *    *    *                       
-    │    │    │    │    │                       
-    │    │    │    │    │                       
-    │    │    │    │    │                       
-    │    │    │    │    └───── Day of Week (0 - 6) (Sunday = 0)
-    │    │    │    └────────── Month (1 - 12)
-    │    │    └─────────────── Day of Month (1 -31)
-    │    └──────────────────── Hour (0 - 23)
-    └───────────────────────── Minute (0 - 59)
+                    *    *    *    *    *
+                    │    │    │    │    │
+                    │    │    │    │    │
+                    │    │    │    │    │
+                    │    │    │    │    └───── Day of Week (1 - 7) (Sunday = 1)
+                    │    │    │    └────────── Month (1 - 12)
+                    │    │    └─────────────── Day of Month (1 - 31)
+                    │    └──────────────────── Hour (0 - 23)
+                    └───────────────────────── Minute (0 - 59)
   
 ### Special Characters
 The special characters allowed in the schedule entries for the schedule include:  
