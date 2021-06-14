@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImpossibleScheduleException.cs" />
+    <Compile Include="IScheduleParser.cs" />
+    <Compile Include="IScheduler.cs" />
     <Compile Include="Matchers\DayOfMonthMatcher.cs" />
     <Compile Include="Matchers\DayOfWeekMatcher.cs" />
     <Compile Include="Matchers\HourMatcher.cs" />

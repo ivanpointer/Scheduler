@@ -1,6 +1,6 @@
 ﻿/*
- * (C)2014 Ivan Andrew Pointer (ivan@pointerplace.us)
- * Date: 11/24/2014
+ * © 2014-2021 Ivan Andrew Pointer (ivan@pointerplace.us)
+ * Date: 11/24/2014, 06/14/2021
  * License: Apache License 2 (https://github.com/ivanpointer/Scheduler/blob/master/LICENSE)
  * GitHub: https://github.com/ivanpointer/Scheduler
  */
@@ -15,7 +15,8 @@ namespace PointerPlace.Scheduler
     /// Parses a cron style schedule string into a Schedule so that the engine
     /// can determine the next value in the schedule.
     /// </summary>
-    public class ScheduleParser
+    /// <seealso cref="PointerPlace.Scheduler.IScheduleParser" />
+    public class ScheduleParser : IScheduleParser
     {
         // A map for converting a string value of the day of week, into its associated integer value
         private static readonly IDictionary<string, int> DayOfWeekMap = new Dictionary<string, int>
@@ -34,7 +35,7 @@ namespace PointerPlace.Scheduler
         /// </summary>
         /// <param name="scheduleString">The schedule string to parse into a Schedule</param>
         /// <returns>The Schedule that was parsed from the provided schedule string</returns>
-        public static Schedule ParseSchedule(string scheduleString)
+        public Schedule ParseSchedule(string scheduleString)
         {
             if (String.IsNullOrEmpty(scheduleString) == false)
             {
