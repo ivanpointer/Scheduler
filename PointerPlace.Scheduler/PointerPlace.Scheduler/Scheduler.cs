@@ -1,6 +1,6 @@
 ﻿/*
- * (C)2014 Ivan Andrew Pointer (ivan@pointerplace.us)
- * Date: 11/24/2014
+ * © 2014-2021 Ivan Andrew Pointer (ivan@pointerplace.us)
+ * Date: 11/24/2014, 06/12/2021
  * License: Apache License 2 (https://github.com/ivanpointer/Scheduler/blob/master/LICENSE)
  * GitHub: https://github.com/ivanpointer/Scheduler
  */
@@ -12,12 +12,29 @@ namespace PointerPlace.Scheduler
 {
     /// <summary>
     /// Responsible for taking a parsed schedule, and a DateTime starting point, and
-    /// determining the next valid DateTime for the given schedule and starting point
+    /// determining the next valid DateTime for the given schedule and starting point.
     /// </summary>
-    public class Scheduler
+    /// <seealso cref="PointerPlace.Scheduler.IScheduler" />
+    public class Scheduler : IScheduler
     {
-        // The gregorian calendar repeats itself every 28 years
+        // The Gregorian calendar repeats itself every 28 years
         private const int MaxYears = 28;
+
+        /// <summary>
+        /// The schedule parser.
+        /// </summary>
+        private readonly IScheduleParser _scheduleParser;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Scheduler"/> class.
+        /// </summary>
+        /// <param name="scheduleParser">The schedule parser.</param>
+        public Scheduler(
+            IScheduleParser scheduleParser = default)
+        {
+            // Allow injection of a schedule parser; use the default one if none provided.
+            _scheduleParser = scheduleParser ?? new ScheduleParser();
+        }
 
         /// <summary>
         /// Returns the next DateTime for a given Schedule, from the given DateTime starting point.
@@ -26,7 +43,7 @@ namespace PointerPlace.Scheduler
         /// <param name="schedule">The schedule to use for determining the next DateTime</param>
         /// <param name="startingPoint">The DateTime from which to start looking.  Defaults to DateTime.Now.</param>
         /// <returns>The next DateTime for the given Schedule from the given DateTime starting point, null if no valid next date is found, the schedule is impossible, and a ImpossibleScheduleException is thrown.</returns>
-        public static DateTime GetNext(Schedule schedule, DateTime? startingPoint = null)
+        public DateTime GetNext(Schedule schedule, DateTime? startingPoint = null)
         {
             // Determine our starting point
             if (startingPoint.HasValue == false)
@@ -63,9 +80,9 @@ namespace PointerPlace.Scheduler
         /// <param name="scheduleString">The schedule string to parse</param>
         /// <param name="startingPoint">The DateTime from which to start looking.  Defaults to DateTime.Now.</param>
         /// <returns>The next DateTime for the given Schedule from the given DateTime starting point, null if no valid next date is found, the schedule is impossible, and a ImpossibleScheduleException is thrown.</returns>
-        public static DateTime GetNext(string scheduleString, DateTime? startingPoint = null)
+        public DateTime GetNext(string scheduleString, DateTime? startingPoint = null)
         {
-            var schedule = ScheduleParser.ParseSchedule(scheduleString);
+            var schedule = _scheduleParser.ParseSchedule(scheduleString);
 
             return GetNext(schedule, startingPoint);
         }
@@ -116,7 +133,7 @@ namespace PointerPlace.Scheduler
                 if (!container.Hour.Increment())
                     return MatchDay(container, point, true);
 
-            if(!container.Hour.Matches())
+            if (!container.Hour.Matches())
                 return MatchHour(container, point, true);
 
             return MatchMinute(container, point);

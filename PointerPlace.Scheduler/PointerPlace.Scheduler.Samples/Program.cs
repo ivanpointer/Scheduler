@@ -1,29 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PointerPlace.Scheduler.Samples
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        private static void Main(string[] args)
         {
+            // Setup
+            var scheduler = new Scheduler();
+            var scheduleParser = new ScheduleParser();
 
             // Example 1
-            Schedule schedule = ScheduleParser.ParseSchedule("*/15 0-6/2 * * MON-FRI");
-            DateTime example1 = Scheduler.GetNext(schedule);
-            Console.WriteLine(String.Format("Example 1: {0}", example1));
+            Schedule schedule = scheduleParser.ParseSchedule("*/15 0-6/2 * * MON-FRI");
+            DateTime example1 = scheduler.GetNext(schedule);
+            Console.WriteLine(string.Format("Example 1: {0}", example1));
 
             // Example 2
-            DateTime example2 = Scheduler.GetNext("*/7 * * * *");
-            Console.WriteLine(String.Format("Example 2: {0}", example2));
+            DateTime example2 = scheduler.GetNext("*/7 * * * *");
+            Console.WriteLine(string.Format("Example 2: {0}", example2));
 
             // Pause and exit
             Console.WriteLine("Press [Enter] to exit");
             Console.ReadLine();
-
         }
     }
 }

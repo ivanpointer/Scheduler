@@ -1,19 +1,17 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace PointerPlace.Scheduler.Test
 {
     [TestClass]
     public class ScheduleTests
     {
-
         [TestMethod]
         public void TestHourRollover()
         {
             var point = new DateTime(2014, 11, 22, 13, 52, 37);
 
-            point = Scheduler.GetNext("*/15 * * * *", point);
+            point = _schedulerUnderTest.GetNext("*/15 * * * *", point);
 
             Assert.AreEqual(2014, point.Year);
             Assert.AreEqual(11, point.Month);
@@ -29,7 +27,7 @@ namespace PointerPlace.Scheduler.Test
         {
             var point = new DateTime(2014, 11, 22, 20, 52, 37);
 
-            point = Scheduler.GetNext("* */8 * * *", point);
+            point = _schedulerUnderTest.GetNext("* */8 * * *", point);
 
             Assert.AreEqual(2014, point.Year);
             Assert.AreEqual(11, point.Month);
@@ -45,7 +43,7 @@ namespace PointerPlace.Scheduler.Test
         {
             var point = new DateTime(2014, 11, 29, 20, 52, 37);
 
-            point = Scheduler.GetNext("* * */7 * *", point);
+            point = _schedulerUnderTest.GetNext("* * */7 * *", point);
 
             Assert.AreEqual(2014, point.Year);
             Assert.AreEqual(12, point.Month);
@@ -61,7 +59,7 @@ namespace PointerPlace.Scheduler.Test
         {
             var point = new DateTime(2014, 11, 29, 20, 52, 37);
 
-            point = Scheduler.GetNext("* * * */5 *", point);
+            point = _schedulerUnderTest.GetNext("* * * */5 *", point);
 
             Assert.AreEqual(2015, point.Year);
             Assert.AreEqual(5, point.Month);
@@ -77,7 +75,7 @@ namespace PointerPlace.Scheduler.Test
         {
             var point = new DateTime(2017, 11, 29, 20, 52, 37);
 
-            point = Scheduler.GetNext("0 0 29 2 *", point);
+            point = _schedulerUnderTest.GetNext("0 0 29 2 *", point);
 
             Assert.AreEqual(2020, point.Year);
             Assert.AreEqual(2, point.Month);
@@ -93,7 +91,7 @@ namespace PointerPlace.Scheduler.Test
         {
             var point = new DateTime(2014, 11, 29, 20, 52, 37);
 
-            point = Scheduler.GetNext("0 0 * * WED", point);
+            point = _schedulerUnderTest.GetNext("0 0 * * WED", point);
 
             Assert.AreEqual(2014, point.Year);
             Assert.AreEqual(12, point.Month);
@@ -104,5 +102,21 @@ namespace PointerPlace.Scheduler.Test
             Assert.AreEqual(0, point.Millisecond);
         }
 
+        #region Scaffolding
+
+        /// <summary>
+        /// The scheduler under test.
+        /// </summary>
+        private readonly IScheduler _schedulerUnderTest;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ScheduleTests"/> class.
+        /// </summary>
+        public ScheduleTests()
+        {
+            _schedulerUnderTest = new Scheduler();
+        }
+
+        #endregion Scaffolding
     }
 }
